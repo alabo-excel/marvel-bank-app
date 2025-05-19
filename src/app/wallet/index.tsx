@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar"
+import { StatusBar } from "react-native"
 import { ScrollView, Image, Text, TouchableOpacity, View, Pressable } from "react-native"
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -14,6 +14,7 @@ import { formatBalance } from '../../utils/data'
 import { useAtom } from "jotai";
 import { balanceAtom, isFirstTime, transactionsAtom } from "@/src/store/jotai";
 import { formatDate } from "@/src/utils/formatTime";
+import { Platform, Dimensions } from "react-native"
 
 
 function App() {
@@ -22,15 +23,15 @@ function App() {
   const refRBSheet2 = useRef<any>(null);
   const [balance, _] = useAtom(balanceAtom)
   const [transactions, __] = useAtom(transactionsAtom)
-  // console.log("Balance: ", balance)
-  // console.log("Transactions: ", transactions)
+  const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
+  const [firstTime, setIsFirstTime] = useAtom(isFirstTime)
 
   return (
 
     <View className="flex-1 p-2 bg-gray-50">
       {/* <StatusBar style="dark" /> */}
-      <StatusBar
-        hidden={true} />
+      {/* <StatusBar
+        hidden={true} /> */}
       {/* Header */}
       <View className="flex-row justify-between items-center px-4 pt-12 pb-4">
         <View className="flex-row items-center">
@@ -49,7 +50,7 @@ function App() {
           zone={1}
           text="See your account balance. Click on the eye icon to close/reveal the amount visibility"
           borderRadius={30}
-        // shape="rectangle"
+
         >
           <View className="mx-4 my-2 border border-[#D9D9D9] bg-white rounded-3xl p-4">
             <View className="flex-row justify-between items-center">
@@ -86,7 +87,10 @@ function App() {
             borderRadius={10}
           >
             <View className="">
-              <TouchableOpacity onPress={() => router.push('/transfer')} className="flex-row items-center justify-center bg-[#0CB9DE] rounded-full py-3 px-6">
+              <TouchableOpacity onPress={() => {
+                router.push('/transfer'),
+                  setIsFirstTime(false)
+              }} className="flex-row items-center justify-center bg-[#0CB9DE] rounded-full py-3 px-6">
                 <Feather name="send" size={20} color="white" />
                 <Text className="ml-2 text-white font-medium">Transfer</Text>
               </TouchableOpacity>
@@ -278,10 +282,19 @@ function App() {
 }
 
 export default function AppwithProvider() {
-  const [FirstTime, setIsFirstTime] = useAtom(isFirstTime)
+  const [firstTime, _] = useAtom(isFirstTime)
 
   return (
-    <TourGuideProvider startAtMount={FirstTime}  >
+    <TourGuideProvider startAtMount={firstTime} {...Platform.select({
+      android: {
+        backdropColor: 'rgba(0,0,0,0.7)',
+        androidStatusBarVisible: true,
+        tooltipStyle: {
+          marginTop: StatusBar.currentHeight,
+          // elevation: 24,
+        }
+      }
+    })} >
       <App />
     </TourGuideProvider>
   )
