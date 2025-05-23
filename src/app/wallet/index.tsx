@@ -25,6 +25,9 @@ function App() {
   const [transactions, __] = useAtom(transactionsAtom)
   const statusBarHeight = Platform.OS === 'android' ? StatusBar.currentHeight : 0;
   const [firstTime, setIsFirstTime] = useAtom(isFirstTime)
+  const {
+    start, // a function to start the tourguide
+  } = useTourGuideController()
 
   return (
 
@@ -111,7 +114,7 @@ function App() {
         {/* Info Cards */}
         <View className="mx-4 my-2">
           {/* Security Card */}
-          <Pressable onPress={() => refRBSheet2.current.open()}>
+          <Pressable onPress={() => refRBSheet.current.open()}>
             <View className="bg-[#E8F5E9] rounded-xl p-4 mb-3 flex-row">
               <View className="w-10 h-10 rounded-full bg-[#4CAF50] items-center justify-center mr-3">
                 <MaterialCommunityIcons name="shield-lock-outline" size={18} color="black" />
@@ -128,7 +131,7 @@ function App() {
             </View>
           </Pressable>
           {/* App Guide Card */}
-          <Pressable onPress={() => refRBSheet2.current.open()}>
+          <Pressable onPress={() => start()}>
             <View className="bg-[#FFEBEE] rounded-xl p-4 mb-3 flex-row">
               <View className="w-10 h-10 rounded-full bg-[#F48FB1] items-center justify-center mr-3">
                 <MaterialIcons name="phone-android" size={18} color="black" />
@@ -146,20 +149,22 @@ function App() {
           </Pressable>
 
           {/* Privacy Card */}
-          <View className="bg-[#E3F2FD] rounded-xl p-4 mb-3 flex-row">
-            <View className="w-10 h-10 rounded-full bg-[#29B6F6] items-center justify-center mr-3">
-              <MaterialCommunityIcons name="qrcode-scan" size={18} color="black" />
+          <Pressable onPress={() => refRBSheet2.current.open()}>
+            <View className="bg-[#E3F2FD] rounded-xl p-4 mb-3 flex-row">
+              <View className="w-10 h-10 rounded-full bg-[#29B6F6] items-center justify-center mr-3">
+                <MaterialCommunityIcons name="qrcode-scan" size={18} color="black" />
+              </View>
+              <View className="flex-1">
+                <Text className="font-bold text-base">Your Privacy, Our Priority</Text>
+                <Text className="text-gray-700 text-sm mt-1">
+                  We value your privacy. Here&apos;s how we collect, store, and use your data. Transparency is key to trust.
+                </Text>
+              </View>
+              <TouchableOpacity>
+                <AntDesign name="closecircleo" size={12} color="black" />
+              </TouchableOpacity>
             </View>
-            <View className="flex-1">
-              <Text className="font-bold text-base">Your Privacy, Our Priority</Text>
-              <Text className="text-gray-700 text-sm mt-1">
-                We value your privacy. Here&apos;s how we collect, store, and use your data. Transparency is key to trust.
-              </Text>
-            </View>
-            <TouchableOpacity>
-              <AntDesign name="closecircleo" size={12} color="black" />
-            </TouchableOpacity>
-          </View>
+          </Pressable>
         </View>
 
         {/* Transactions */}

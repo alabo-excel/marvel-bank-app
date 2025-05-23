@@ -11,6 +11,7 @@ import { authenticateWithBiometrics } from "@/src/utils/BiometricsAuth";
 import { formatBalance } from "@/src/utils/data";
 import { useAtom } from "jotai";
 import { balanceAtom, transactionsAtom } from "@/src/store/jotai";
+import BankDropdown from "@/src/components/Banks";
 
 export default function TransferPage() {
   const [amount, setAmount] = useState("")
@@ -144,13 +145,15 @@ export default function TransferPage() {
           </View>
 
           {/* Receiving Bank */}
-          <View className="mb-6">
+          <View>
+            <BankDropdown />
+          </View>          {/* <View className="mb-6">
             <Text className="text-base font-medium mb-2">Receiving Bank</Text>
             <TouchableOpacity className="bg-white p-4 rounded-md border border-gray-200 flex-row justify-between items-center">
               <Text className="text-gray-400">Select Receiving Bank</Text>
               <AntDesign name="caretdown" size={18} color="black" />
             </TouchableOpacity>
-          </View>
+          </View> */}
 
           {/* Receiver Name */}
           <View className="mb-6">

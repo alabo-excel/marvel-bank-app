@@ -2,7 +2,7 @@
 
 import { router } from "expo-router"
 import { useState } from "react"
-import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native"
+import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View, Alert  } from "react-native"
 import { authenticateWithBiometrics } from "../utils/BiometricsAuth"
 
 interface LoginScreenProps {
@@ -10,20 +10,39 @@ interface LoginScreenProps {
   navigation?: any
 }
 
-export default function LoginScreen({ onLogin, navigation }: LoginScreenProps) {
+interface Credentials {
+  email: string
+  password: string
+}
+
+const validCredentials: Credentials[] = [
+  { email: "user1@example.com", password: "password123" },
+  { email: "user2@example.com", password: "securepass" },
+  { email: "test@test.com", password: "test123" },
+  // Add more credentials as needed
+]
+
+export default function LoginScreen({ onLogin }: LoginScreenProps) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   const handleLogin = () => {
+    // Check if credentials match any in the array
+    const isValid = validCredentials.some(
+      cred => cred.email === email && cred.password === password
+    )
+
+    if (!isValid) {
+      Alert.alert("Login Failed", "Invalid email or password")
+      return
+    }
+
+    // If credentials are valid
     if (onLogin) {
       onLogin(email, password)
     }
 
     router.push('/wallet')
-    // If using with navigation
-    // if (navigation) {
-    //   navigation.navigate("Home")
-    // }
   }
 
 
