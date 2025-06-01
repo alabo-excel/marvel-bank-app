@@ -56,21 +56,21 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
   }
 
   return (
-    <KeyboardAvoidingView className="flex-1 bg-gray-50" behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView className="flex-1 bg-[#080808]" behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ScrollView
         className="flex-1"
         contentContainerClassName="flex-grow justify-center px-6"
         keyboardShouldPersistTaps="handled"
       >
         <View className="items-center mb-6">
-          <Text className="text-gray-400 mb-2">Welcome</Text>
-          <Text className="text-2xl font-bold">Login to Your Account</Text>
+          <Text className="text-[#979696] mb-2">Welcome</Text>
+          <Text className="text-2xl text-white font-bold">Login to Your Account</Text>
         </View>
 
         <View className="mb-6">
-          <Text className="text-base font-medium mb-2">Email</Text>
+          <Text className="text-base text-white font-medium mb-2">Email</Text>
           <TextInput
-            className="bg-white p-4 rounded-md border border-gray-200"
+            className="bg-[#23262B] p-4 rounded-md"
             placeholder="Enter your email"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -80,9 +80,9 @@ export default function LoginScreen({ onLogin }: LoginScreenProps) {
         </View>
 
         <View className="mb-12">
-          <Text className="text-base font-medium mb-2">Password</Text>
+          <Text className="text-base text-white font-medium mb-2">Password</Text>
           <TextInput
-            className="bg-white p-4 rounded-md border border-gray-200"
+            className="bg-[#23262B] p-4 rounded-md"
             placeholder="Enter your password"
             secureTextEntry
             value={password}

@@ -109,14 +109,14 @@ export default function TransferPage() {
   }, [])
 
   return (
-    <KeyboardAvoidingView className="flex-1 bg-gray-50" behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <KeyboardAvoidingView className="flex-1 bg-[#080808]" behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ScrollView className="flex-1">
         {/* Header */}
         <View className="flex-row items-center px-4 pt-12 pb-4">
           <TouchableOpacity className="mr-4" onPress={() => router?.back()}>
             <Ionicons name="chevron-back" size={24} color="black" />
           </TouchableOpacity>
-          <Text className="text-xl font-semibold">Transfer Money</Text>
+          <Text className="text-xl text-white font-semibold">Transfer Money</Text>
         </View>
 
         {/* Safety Alert */}
@@ -131,9 +131,9 @@ export default function TransferPage() {
         <View className="px-4">
           {/* Amount */}
           <View className="mb-6">
-            <Text className="text-base font-medium mb-2">Amount</Text>
+            <Text className="text-base text-white font-medium mb-2">Amount</Text>
             <TextInput
-              className="bg-white p-4 rounded-md border border-gray-200"
+              className="bg-[#23262B] text-white p-4 rounded-md"
               placeholder="Enter amount"
               keyboardType="numeric"
               value={amount}
@@ -157,9 +157,9 @@ export default function TransferPage() {
 
           {/* Receiver Name */}
           <View className="mb-6">
-            <Text className="text-base font-medium mb-2">Receiver name</Text>
+            <Text className="text-base text-white font-medium mb-2">Receiver name</Text>
             <TextInput
-              className="bg-white p-4 rounded-md border border-gray-200"
+              className="bg-[#23262B] p-4 rounded-md text-white"
               placeholder="Receiver name"
               value={receiverName}
               onChangeText={setReceiverName}
@@ -168,9 +168,9 @@ export default function TransferPage() {
 
           {/* Narration */}
           <View className="mb-6">
-            <Text className="text-base font-medium mb-2">Narration</Text>
+            <Text className="text-base text-white font-medium mb-2">Narration</Text>
             <TextInput
-              className="bg-white p-4 rounded-md border border-gray-200 h-24"
+              className="bg-[#23262B] p-4 rounded-md h-24 text-white"
               placeholder="Enter Narration"
               multiline={true}
               textAlignVertical="top"
@@ -187,7 +187,7 @@ export default function TransferPage() {
       {/* Safety Tips Bottom Sheet */}
       <RBSheet
         ref={refRBSheet}
-        customStyles={{ container: { borderTopLeftRadius: 10, borderTopRightRadius: 10 } }}
+        customStyles={{ container: { borderTopLeftRadius: 10, borderTopRightRadius: 10, backgroundColor: "#080808" } }}
         customModalProps={{
           animationType: 'slide',
           statusBarTranslucent: true,
@@ -195,32 +195,32 @@ export default function TransferPage() {
       >
         <View className="p-6">
           <View className="flex-row justify-between mb-3">
-            <Text className="font-bold text-xl">Stay Secure While Sending Money</Text>
+            <Text className="font-bold text-white text-xl">Stay Secure While Sending Money</Text>
             <TouchableOpacity onPress={() => refRBSheet.current.close()}>
-              <AntDesign name="closecircleo" size={18} color="black" />
+              <AntDesign name="closecircleo" size={18} color="white" />
             </TouchableOpacity>
           </View>
           <View className="flex-row mb-3">
             <Image className="mr-3" source={require("../../../assets/images/carat.png")} />
-            <Text className="text-lg">Double-check recipient details. Avoid sending to the wrong account.</Text>
+            <Text className="text-lg text-white">Double-check recipient details. Avoid sending to the wrong account.</Text>
           </View>
           <View className="flex-row mb-3">
             <Image className="mr-3" source={require("../../../assets/images/carat.png")} />
-            <Text className="text-lg">Beware of urgency scams. If someone is rushing you, it could be fraud.</Text>
+            <Text className="text-lg text-white">Beware of urgency scams. If someone is rushing you, it could be fraud.</Text>
           </View>
           <View className="flex-row mb-3">
             <Image className="mr-3" source={require("../../../assets/images/carat.png")} />
-            <Text className="text-lg">Don&apos;t reuse OTPs. Each one is unique for a reason.</Text>
+            <Text className="text-lg text-white">Don&apos;t reuse OTPs. Each one is unique for a reason.</Text>
           </View>
           <View className="flex-row mb-3">
             <Image className="mr-3" source={require("../../../assets/images/carat.png")} />
-            <Text className="text-lg">Only send from secure devices. Avoid public Wi-Fi when making transfers.</Text>
+            <Text className="text-lg text-white">Only send from secure devices. Avoid public Wi-Fi when making transfers.</Text>
           </View>
         </View>
       </RBSheet>
 
       {/* Transfer Button - Fixed at bottom */}
-      <View className="px-4 py-4 bg-gray-50">
+      <View className="px-4 py-4 bg-[#080808]">
         <TouchableOpacity
           className="bg-[#0CB9DE] py-4 rounded-full items-center"
           onPress={handleTransfer}

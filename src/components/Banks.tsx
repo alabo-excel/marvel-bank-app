@@ -27,15 +27,15 @@ export default function BankDropdown() {
 
   return (
     <View className="mb-6">
-      <Text className="text-base font-medium mb-2">Receiving Bank</Text>
+      <Text className="text-base text-white font-medium mb-2">Receiving Bank</Text>
       <TouchableOpacity 
-        className="bg-white p-4 rounded-md border border-gray-200 flex-row justify-between items-center"
+        className="bg-[#23262B] p-4 rounded-md flex-row justify-between items-center"
         onPress={() => setModalVisible(true)}
       >
-        <Text className={selectedBank ? "text-black" : "text-gray-400"}>
+        <Text className={selectedBank ? "text-white" : "text-gray-400"}>
           {selectedBank || "Select Receiving Bank"}
         </Text>
-        <AntDesign name="caretdown" size={18} color="black" />
+        <AntDesign name="caretdown" size={18} color="white" />
       </TouchableOpacity>
 
       <Modal
@@ -49,19 +49,19 @@ export default function BankDropdown() {
           activeOpacity={1}
           onPress={() => setModalVisible(false)}
         >
-          <View className="bg-white rounded-t-lg max-h-[70%]">
+          <View className="bg-[#080808] rounded-t-lg max-h-[70%]">
             <View className="border-b border-gray-200 p-4">
-              <Text className="text-lg font-semibold">Select Bank</Text>
+              <Text className="text-lg text-white font-semibold">Select Bank</Text>
             </View>
             <FlatList
               data={banks}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  className="p-4 border-b border-gray-100"
+                  className="p-4"
                   onPress={() => handleSelectBank(item.name)}
                 >
-                  <Text>{item.name}</Text>
+                  <Text className="text-white">{item.name}</Text>
                 </TouchableOpacity>
               )}
               contentContainerStyle={{ paddingBottom: 20 }}
